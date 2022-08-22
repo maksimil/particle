@@ -1,5 +1,5 @@
 {
-  "name": "@example/minimal",
+  "name": "particle",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,9 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "astro": "^1.0.6"
+    "astro": "^1.0.6",
+    "astro-windicss": "^0.1.0",
+    "vite": "^3.0.9",
+    "windicss": "^3.5.6"
   }
 }
