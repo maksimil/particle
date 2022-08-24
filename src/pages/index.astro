@@ -1,4 +1,7 @@
 ---
+import { getArticle } from "../api/articles"
+
+console.log(await getArticle("test"))
 ---
 
 <html lang="en">
@@ -9,6 +12,11 @@
 		<title>particle</title>
 	</head>
 	<body>
-		<h1>particle</h1>
+		<div class="w-screen h-screen">
+			<div>
+				<div>Particle.</div>
+				<div>Место для вещей <3</div>
+			</div>
+		</div>
 	</body>
 </html>

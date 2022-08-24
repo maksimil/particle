@@ -1,14 +1,20 @@
 lockfileVersion: 5.4
 
 specifiers:
-  astro: ^1.0.6
+  '@types/js-yaml': ^4.0.5
+  '@types/node': ^18.7.11
+  astro: ^1.0.7
   astro-windicss: ^0.1.0
+  js-yaml: ^4.1.0
   vite: ^3.0.9
   windicss: ^3.5.6
 
 devDependencies:
-  astro: 1.0.6
-  astro-windicss: 0.1.0_2qn7o3z6wtubtzs54ojau7yqfq
+  '@types/js-yaml': 4.0.5
+  '@types/node': 18.7.11
+  astro: 1.0.7
+  astro-windicss: 0.1.0_f26b2o6nui7c5tns4x2nqbfoea
+  js-yaml: 4.1.0
   vite: 3.0.9
   windicss: 3.5.6
 
@@ -92,7 +98,7 @@ packages:
     resolution: {integrity: sha512-HxEFslvbv+cfOs51q/C7aMVFuW3EAGg0d1xXU/0e/QeScDzfrp5Ra4SOb8mV082SgENVjtVvet4zR84t3at4VQ==}
     engines: {node: ^14.18.0 || >=16.12.0}
     dependencies:
-      prismjs: 1.28.0
+      prismjs: 1.29.0
     dev: true
 
   /@astrojs/telemetry/1.0.0:
@@ -488,6 +494,10 @@ packages:
       '@types/unist': 2.0.6
     dev: true
 
+  /@types/js-yaml/4.0.5:
+    resolution: {integrity: sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==}
+    dev: true
+
   /@types/json5/0.0.30:
     resolution: {integrity: sha512-sqm9g7mHlPY/43fcSNrCYfOeX9zkTTK+euO5E6+CVijSMm5tTjkVdwdqRkY3ljjIAf8679vps5jKUoJBCLsMDA==}
     dev: true
@@ -510,6 +520,10 @@ packages:
     resolution: {integrity: sha512-3TGCfOcy8R8mMQ4CNSNOe3PG66HttvjcLzCoOpvXvDtfWOTi+uT/rxeOKm/qEwbM4SNe1O/PjdiBK2YcTjU4OQ==}
     dependencies:
       '@types/unist': 2.0.6
+    dev: true
+
+  /@types/node/18.7.11:
+    resolution: {integrity: sha512-KZhFpSLlmK/sdocfSAjqPETTMd0ug6HIMIAwkwUpU79olnZdQtMxpQP+G1wDzCH7na+FltSIhbaZuKdwZ8RDrw==}
     dev: true
 
   /@types/parse5/6.0.3:
@@ -614,6 +628,10 @@ packages:
       sprintf-js: 1.0.3
     dev: true
 
+  /argparse/2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+    dev: true
+
   /array-iterate/1.1.4:
     resolution: {integrity: sha512-sNRaPGh9nnmdC8Zf+pT3UqP8rnWj5Hf9wiFGsX3wUQ2yVSIhO2ShFwCoceIPpB41QF6i2OEmrHmCo36xronCVA==}
     dev: true
@@ -625,13 +643,13 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /astro-windicss/0.1.0_2qn7o3z6wtubtzs54ojau7yqfq:
+  /astro-windicss/0.1.0_f26b2o6nui7c5tns4x2nqbfoea:
     resolution: {integrity: sha512-Is/WVuonX+aazFw81ET2x3rGbSqFhrnuNIQeCyh52vCwDUClJoHtP+/vkRGy5HNqmHejuytCRtCOkShxYpI0NA==}
     peerDependencies:
       astro: ^1.0.6
       windicss: '*'
     dependencies:
-      astro: 1.0.6
+      astro: 1.0.7
       vite-plugin-windicss: 1.8.7_vite@3.0.9
       windicss: 3.5.6
     transitivePeerDependencies:
@@ -639,8 +657,8 @@ packages:
       - vite
     dev: true
 
-  /astro/1.0.6:
-    resolution: {integrity: sha512-QAkdkzP3PbauiO4YnOgVTWY6z26heKruoXW9TnN8Bbmwtf7DUFIchi6CFSAVYSONX8XtRnj+p6fCkk06OWfJ4w==}
+  /astro/1.0.7:
+    resolution: {integrity: sha512-QKG+/RbqZ3NNlLO3JuqJjYtdYUDM05H5UljURl1a9gM6WyuGobMkubW5Bhu1l6HmySZ6x7AZSnqsfcmHxdCxCQ==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -696,7 +714,7 @@ packages:
       tsconfig-resolver: 3.0.1
       unist-util-visit: 4.1.1
       vfile: 5.3.4
-      vite: 3.0.5
+      vite: 3.0.9
       yargs-parser: 21.1.1
       zod: 3.18.0
     transitivePeerDependencies:
@@ -750,8 +768,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001381
-      electron-to-chromium: 1.4.225
+      caniuse-lite: 1.0.30001382
+      electron-to-chromium: 1.4.227
       node-releases: 2.0.6
       update-browserslist-db: 1.0.5_browserslist@4.21.3
     dev: true
@@ -768,8 +786,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001381:
-    resolution: {integrity: sha512-fEnkDOKpvp6qc+olg7+NzE1SqyfiyKf4uci7fAU38M3zxs0YOyKOxW/nMZ2l9sJbt7KZHcDIxUnbI0Iime7V4w==}
+  /caniuse-lite/1.0.30001382:
+    resolution: {integrity: sha512-2rtJwDmSZ716Pxm1wCtbPvHtbDWAreTPxXbkc5RkKglow3Ig/4GNGazDI9/BVnXbG/wnv6r3B5FEbkfg9OcTGg==}
     dev: true
 
   /ccount/2.0.1:
@@ -941,8 +959,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.225:
-    resolution: {integrity: sha512-ICHvGaCIQR3P88uK8aRtx8gmejbVJyC6bB4LEC3anzBrIzdzC7aiZHY4iFfXhN4st6I7lMO0x4sgBHf/7kBvRw==}
+  /electron-to-chromium/1.4.227:
+    resolution: {integrity: sha512-I9VVajA3oswIJOUFg2PSBqrHLF5Y+ahIfjOV9+v6uYyBqFZutmPxA6fxocDUUmgwYevRWFu1VjLyVG3w45qa/g==}
     dev: true
 
   /emmet/2.3.6:
@@ -1610,6 +1628,13 @@ packages:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
+    dev: true
+
+  /js-yaml/4.1.0:
+    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+    hasBin: true
+    dependencies:
+      argparse: 2.0.1
     dev: true
 
   /jsesc/2.5.2:
@@ -2418,8 +2443,8 @@ packages:
       which-pm: 2.0.0
     dev: true
 
-  /prismjs/1.28.0:
-    resolution: {integrity: sha512-8aaXdYvl1F7iC7Xm1spqSaY/OJBpYW3v+KJ+F17iYxvdc8sfjW194COK5wVhMZX45tGteiBQgdvD/nhxcRwylw==}
+  /prismjs/1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
     dev: true
 
@@ -3022,33 +3047,6 @@ packages:
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /vite/3.0.5:
-    resolution: {integrity: sha512-bRvrt9Tw8EGW4jj64aYFTnVg134E8hgDxyl/eEHnxiGqYk7/pTPss6CWlurqPOUzqvEoZkZ58Ws+Iu8MB87iMA==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.14.54
-      postcss: 8.4.16
-      resolve: 1.22.1
-      rollup: 2.78.1
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /vite/3.0.9:
