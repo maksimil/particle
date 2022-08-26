@@ -1,22 +1,20 @@
 ---
-import { getArticle } from "../api/articles"
-
-console.log(await getArticle("test"))
+import { getArticle } from "../api/articles";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>particle</title>
-	</head>
-	<body>
-		<div class="w-screen h-screen">
-			<div>
-				<div>Particle.</div>
-				<div>Место для вещей <3</div>
-			</div>
-		</div>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>particle</title>
+  </head>
+  <body>
+    <div class="w-screen h-screen">
+       <div>
+        <div>Particle.</div>
+        <div>A place for stuff <3</div>
+      </div>
+    </div>
+  </body>
 </html>

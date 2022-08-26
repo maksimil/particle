@@ -42,7 +42,7 @@ const getArticles = async (): Promise<Article[]> => {
 
           return {
             title: mddata.frontmatter.title,
-            contents: await mddata.compiledContent(),
+            contents: mddata.compiledContent(),
           } as Chapter;
         })
       );
