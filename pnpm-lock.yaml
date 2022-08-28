@@ -1,20 +1,24 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@rollup/plugin-yaml': ^3.1.0
   '@types/js-yaml': ^4.0.5
   '@types/node': ^18.7.13
-  astro: ^1.1.0
+  astro: ^1.1.1
   astro-windicss: ^0.1.0
   js-yaml: ^4.1.0
+  rollup: ^2.78.1
   vite: ^3.0.9
   windicss: ^3.5.6
 
 devDependencies:
+  '@rollup/plugin-yaml': 3.1.0_rollup@2.78.1
   '@types/js-yaml': 4.0.5
   '@types/node': 18.7.13
-  astro: 1.1.0
-  astro-windicss: 0.1.0_diuuh7w27qteatlkan6surtxaq
+  astro: 1.1.1
+  astro-windicss: 0.1.0_lttewdhinz472tqsuqrbmjmvri
   js-yaml: 4.1.0
+  rollup: 2.78.1
   vite: 3.0.9
   windicss: 3.5.6
 
@@ -474,6 +478,30 @@ packages:
       tsm: 2.2.2
     dev: true
 
+  /@rollup/plugin-yaml/3.1.0_rollup@2.78.1:
+    resolution: {integrity: sha512-61PsAXqN7YNYdg/nezK3NkqAu6e3Qu2wjHYW3r52Nx0aLi+rG7gkkIqtvxG8EtSqE2rra5CUcWBZj+v362qt9A==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.78.1
+      js-yaml: 3.14.1
+      rollup: 2.78.1
+      tosource: 1.0.0
+    dev: true
+
+  /@rollup/pluginutils/3.1.0_rollup@2.78.1:
+    resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.3.1
+      rollup: 2.78.1
+    dev: true
+
   /@types/acorn/4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
     dependencies:
@@ -496,6 +524,10 @@ packages:
     resolution: {integrity: sha512-3qvGd0z8F2ENTGr/GG1yViqfiKmRfrXVx5sJyHGFu3z7m5g5utCQtGp/g29JnjflhtQJBv1WDQukHiT58xPcYQ==}
     dependencies:
       '@types/estree': 1.0.0
+    dev: true
+
+  /@types/estree/0.0.39:
+    resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
     dev: true
 
   /@types/estree/1.0.0:
@@ -657,13 +689,13 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /astro-windicss/0.1.0_diuuh7w27qteatlkan6surtxaq:
+  /astro-windicss/0.1.0_lttewdhinz472tqsuqrbmjmvri:
     resolution: {integrity: sha512-Is/WVuonX+aazFw81ET2x3rGbSqFhrnuNIQeCyh52vCwDUClJoHtP+/vkRGy5HNqmHejuytCRtCOkShxYpI0NA==}
     peerDependencies:
       astro: ^1.0.6
       windicss: '*'
     dependencies:
-      astro: 1.1.0
+      astro: 1.1.1
       vite-plugin-windicss: 1.8.7_vite@3.0.9
       windicss: 3.5.6
     transitivePeerDependencies:
@@ -671,8 +703,8 @@ packages:
       - vite
     dev: true
 
-  /astro/1.1.0:
-    resolution: {integrity: sha512-Bi8vxRMEnXei78XvegprNXFETFS9t5/yu514ACpLD8Fx3iGU74rH3zpyxzVpkNED3Dt1lx2/QfVyjEfj6DJ1ZA==}
+  /astro/1.1.1:
+    resolution: {integrity: sha512-FTjjivWeJizYLidzBgiAAXzILptvT6ssvWodzSwT1mYm9kWiua2kzMk5r6E9KqB+okV4Z/OryxdhWJwmLD0G7g==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -783,7 +815,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001383
-      electron-to-chromium: 1.4.232
+      electron-to-chromium: 1.4.233
       node-releases: 2.0.6
       update-browserslist-db: 1.0.5_browserslist@4.21.3
     dev: true
@@ -978,8 +1010,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.232:
-    resolution: {integrity: sha512-nd+FW8xHjM+PxNWG44nKnwHaBDdVpJUZuI2sS2JJPt/QpdombnmoCRWEEQNnzaktdIQhsNWdD+dlqxwO8Bn99g==}
+  /electron-to-chromium/1.4.233:
+    resolution: {integrity: sha512-ejwIKXTg1wqbmkcRJh9Ur3hFGHFDZDw1POzdsVrB2WZjgRuRMHIQQKNpe64N/qh3ZtH2otEoRoS+s6arAAuAAw==}
     dev: true
 
   /emmet/2.3.6:
@@ -1244,6 +1276,10 @@ packages:
     dependencies:
       '@types/estree-jsx': 1.0.0
       '@types/unist': 2.0.6
+    dev: true
+
+  /estree-walker/1.0.1:
+    resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
     dev: true
 
   /execa/6.1.0:
@@ -2673,6 +2709,14 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /rollup/2.78.1:
+    resolution: {integrity: sha512-VeeCgtGi4P+o9hIg+xz4qQpRl6R401LWEXBmxYKOV4zlF82lyhgh2hTZnheFUbANE8l2A41F458iwj2vEYaXJg==}
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
   /run-parallel/1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
@@ -2921,6 +2965,11 @@ packages:
     engines: {node: '>=8.0'}
     dependencies:
       is-number: 7.0.0
+    dev: true
+
+  /tosource/1.0.0:
+    resolution: {integrity: sha512-N6g8eQ1eerw6Y1pBhdgkubWIiPFwXa2POSUrlL8jth5CyyEWNWzoGKRkO3CaO7Jx27hlJP54muB3btIAbx4MPg==}
+    engines: {node: '>=0.4.0'}
     dev: true
 
   /totalist/3.0.0:

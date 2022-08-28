@@ -1,0 +1,22 @@
+---
+import * as path from "path";
+
+export const getStaticPaths = async () => {
+  const ids = (await Astro.glob("/data/articles/*/index.md")).map((md) =>
+    path.basename(path.dirname(md.file))
+  );
+  return ids.map((id) => ({ params: { id } }));
+};
+
+const { id } = Astro.params;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>particle</title>
+  </head>
+  <body><div>{id}</div></body>
+</html>
