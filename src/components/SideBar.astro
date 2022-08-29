@@ -7,7 +7,7 @@ const { links, current } = Astro.props;
     links.map(([name, link]) => {
       const mark = name === current ? ">" : "-";
       return (
-        <a href={link} class="font-mono text-c2 hover:text-c3">
+        <a rel="prefetch" href={link} class="font-mono text-c2 hover:text-c3">
           {mark} {name}
         </a><br>
       );

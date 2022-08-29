@@ -2,8 +2,8 @@
 title: article
 author: KsK<a@gmail.com>
 chapters:
-  - first.md
-  - second.md
+  - first
+  - second
 ---
 
 Lorem ipsum dolor net

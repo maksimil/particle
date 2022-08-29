@@ -18,7 +18,8 @@
     "types": ["astro/client", "node"],
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@api/*": ["src/api/*"]
     }
   }
 }

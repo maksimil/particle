@@ -1,29 +1,24 @@
 ---
 import SideBar from "@components/SideBar.astro";
+import { getArticles } from "@api/article";
 import * as path from "path";
 
 export const getStaticPaths = async () => {
-  return (await Astro.glob("/data/articles/*/index.md")).map((md) => {
-    const id = path.basename(path.dirname(md.file));
-    return { params: { id }, props: { md } };
+  const articles = await getArticles();
+  return articles.map((article) => {
+    return { params: { id: article.id }, props: { article } };
   });
 };
 
 const { id } = Astro.params;
-const { md } = Astro.props;
+const { article } = Astro.props;
 
-const chapterlinks = await Promise.all(
-  md.frontmatter.chapters.map(async (chname) => {
-    const chmd = await import(`../../../data/articles/${id}/${chname}`);
-    return [
-      chmd.frontmatter.title,
-      `/article/${id}/${path.basename(chname, ".md")}`,
-    ];
-  })
-);
+const chapterlinks = article.chapters.map((chapter) => {
+  return [chapter.title, `/article/${id}/${chapter.id}`];
+});
 
-const links = [[md.frontmatter.title, `/article/${id}`], ...chapterlinks];
-const current = md.frontmatter.title;
+const links = [[article.title, `/article/${id}`], ...chapterlinks];
+const current = article.title;
 ---
 
 <html lang="en">
