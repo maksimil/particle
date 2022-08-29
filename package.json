@@ -10,13 +10,9 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@rollup/plugin-yaml": "^3.1.0",
-    "@types/js-yaml": "^4.0.5",
     "@types/node": "^18.7.13",
     "astro": "^1.1.1",
     "astro-windicss": "^0.1.0",
-    "js-yaml": "^4.1.0",
-    "rollup": "^2.78.1",
     "vite": "^3.0.9",
     "windicss": "^3.5.6"
   }
