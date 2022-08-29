@@ -4,20 +4,27 @@ import { getArticles } from "@api/article";
 
 export const getStaticPaths = async () => {
   const articles = await getArticles();
-  return articles.map((article) => {
-    return { params: { id: article.id }, props: { article } };
-  });
+  return articles
+    .map((article) => {
+      return article.chapters.map((chapter) => {
+        return {
+          params: { id: article.id, chapter: chapter.id },
+          props: { article, chapter },
+        };
+      });
+    })
+    .flat();
 };
 
 const { id } = Astro.params;
-const { article } = Astro.props;
+const { article, chapter } = Astro.props;
 
-const chapterlinks = article.chapters.map((chapter) => {
-  return [chapter.title, `/article/${id}/${chapter.id}`];
+const chapterlinks = article.chapters.map((chpt) => {
+  return [chpt.title, `/article/${id}/${chpt.id}`];
 });
 
 const links = [[article.title, `/article/${id}`], ...chapterlinks];
-const current = article.title;
+const current = chapter.title;
 ---
 
 <html lang="en">
