@@ -1,14 +1,29 @@
 ---
+import SideBar from "@components/SideBar.astro";
 import * as path from "path";
 
 export const getStaticPaths = async () => {
-  const ids = (await Astro.glob("/data/articles/*/index.md")).map((md) =>
-    path.basename(path.dirname(md.file))
-  );
-  return ids.map((id) => ({ params: { id } }));
+  return (await Astro.glob("/data/articles/*/index.md")).map((md) => {
+    const id = path.basename(path.dirname(md.file));
+    return { params: { id }, props: { md } };
+  });
 };
 
 const { id } = Astro.params;
+const { md } = Astro.props;
+
+const chapterlinks = await Promise.all(
+  md.frontmatter.chapters.map(async (chname) => {
+    const chmd = await import(`../../../data/articles/${id}/${chname}`);
+    return [
+      chmd.frontmatter.title,
+      `/article/${id}/${path.basename(chname, ".md")}`,
+    ];
+  })
+);
+
+const links = [[md.frontmatter.title, `/article/${id}`], ...chapterlinks];
+const current = md.frontmatter.title;
 ---
 
 <html lang="en">
@@ -18,5 +33,9 @@ const { id } = Astro.params;
     <meta name="generator" content={Astro.generator} />
     <title>particle</title>
   </head>
-  <body><div>{id}</div></body>
+  <body>
+    <div class="flex flex-row">
+      <SideBar {links} {current} />
+    </div>
+  </body>
 </html>

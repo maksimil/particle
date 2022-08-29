@@ -4,10 +4,10 @@ export default defineConfig({
   theme: {
     extend: {
       colors: {
-        black: "rgb(61, 60, 66)",
-        dark: "rgb(127, 82, 131)",
-        light: "rgb(166, 209, 230)",
-        white: "rgb(254, 251, 246)",
+        c0: "rgb(255, 245, 228)",
+        c1: "rgb(255, 196, 196)",
+        c2: "rgb(238, 105, 131)",
+        c3: "rgb(133, 14, 53)",
       },
     },
   },

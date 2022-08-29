@@ -1,0 +1,16 @@
+---
+const { links, current } = Astro.props;
+---
+
+<div class="h-screen bg-c0 p-2">
+  {
+    links.map(([name, link]) => {
+      const mark = name === current ? ">" : "-";
+      return (
+        <a href={link} class="font-mono text-c2 hover:text-c3">
+          {mark} {name}
+        </a><br>
+      );
+    })
+  }
+</div>
