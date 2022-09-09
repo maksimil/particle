@@ -27,9 +27,10 @@ export type Article = {
 
 export const getArticles = async (): Promise<Article[]> => {
   //@ts-ignore
-  const indexes = (await import.meta.glob(
-    "/data/articles/*/index.md"
-  )) as Record<string, () => Promise<MarkdownInstance<IndexFrontmatter>>>;
+  const indexes = import.meta.glob("/data/articles/*/index.md") as Record<
+    string,
+    () => Promise<MarkdownInstance<IndexFrontmatter>>
+  >;
 
   const articles: Article[] = await Promise.all(
     Object.values(indexes).map(async (index_promise) => {

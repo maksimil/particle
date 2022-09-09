@@ -1,9 +1,13 @@
 import { defineConfig } from "astro/config";
-import windicss from "astro-windicss";
-
+import Windicss from "vite-plugin-windicss";
 import prefetch from "@astrojs/prefetch";
+
+import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [windicss(), prefetch()]
+  integrations: [prefetch(), solidJs()],
+  vite: {
+    plugins: [Windicss()],
+  },
 });

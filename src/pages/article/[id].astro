@@ -1,5 +1,7 @@
 ---
+import "virtual:windi.css";
 import SideBar from "@components/SideBar.astro";
+import LinkButton from "@components/LinkButton";
 import { getArticles } from "@api/article";
 
 export const getStaticPaths = async () => {
@@ -30,6 +32,18 @@ const current = article.title;
   <body>
     <div class="flex flex-row">
       <SideBar {links} {current} />
+      <div class="flex-1">
+        <div
+          class={"border-b-3 border-l-3 border-c1 " +
+            "text-4xl text-c3 pl-5 pt-2 pr-10 w-min flex flex-row items-center "}
+        >
+          <LinkButton
+            url={`/article/${id}`}
+            client:load
+          />
+          <span class="ml-4">{article.title}</span>
+        </div>
+      </div>
     </div>
   </body>
 </html>
