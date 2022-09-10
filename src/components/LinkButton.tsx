@@ -18,6 +18,12 @@ const LinkButton: Component<{ url: string }> = (props) => {
         onmouseout={() => {
           imgRef.src = "/link.svg";
         }}
+        onmousedown={() => {
+          imgRef.src = "/link-down.svg";
+        }}
+        onmouseup={() => {
+          imgRef.src = "/link-hover.svg";
+        }}
         onclick={() => {
           console.log(props.url);
           navigator.clipboard.writeText(window.location.hostname + props.url);

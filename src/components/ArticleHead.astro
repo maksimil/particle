@@ -1,0 +1,13 @@
+---
+import LinkButton from "@components/LinkButton";
+
+const { url, title } = Astro.props;
+---
+
+<div
+  class={"border-b-3 border-l-3 border-c1 whitespace-nowrap " +
+    "text-4xl text-c3 pl-5 pt-2 pr-10 pb-1 w-min flex flex-row items-center "}
+>
+  <LinkButton {url} client:load />
+  <span class="ml-4">{title}</span>
+</div>
