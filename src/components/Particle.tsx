@@ -48,11 +48,20 @@ const Particle: Component = () => {
 
   return (
     <div
-      ref={screenDiv}
+      ref={
+        //@ts-ignore
+        screenDiv
+      }
       class="w-screen h-screen flex justify-center items-center bg-c3"
     >
       <div class="w-300px h-116px">
-        <div ref={hitDiv} class="w-300px h-116px absolute " />
+        <div
+          ref={
+            //@ts-ignore
+            hitDiv
+          }
+          class="w-300px h-116px absolute "
+        />
         <Switch>
           <Match when={enter()}>
             <div class="h-88px flex flex-row justify-center flex-wrap">
