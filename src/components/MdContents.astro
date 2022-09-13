@@ -1,0 +1,29 @@
+---
+const { md } = Astro.props;
+---
+
+<style>
+  div.md-contents :global(p) {
+    @apply m-0 mt-2 ml-4;
+  }
+
+  div.md-contents :global(a) {
+    @apply text-c2 underline;
+  }
+
+  div.md-contents :global(a:visited),
+  div.md-contents :global(a:active) {
+    @apply text-c3;
+  }
+
+  div.md-contents :global(h1) {
+    @apply text-c3;
+  }
+
+  div.md-contents :global(strong) {
+    @apply text-c3 font-semibold;
+  }
+</style>
+<div class="md-contents">
+  <md.Content />
+</div>
