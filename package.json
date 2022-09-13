@@ -12,8 +12,8 @@
   "devDependencies": {
     "@astrojs/prefetch": "^0.0.7",
     "@astrojs/solid-js": "^1.1.0",
-    "@types/node": "^18.7.16",
-    "astro": "^1.2.1",
+    "@types/node": "^18.7.17",
+    "astro": "^1.2.2",
     "solid-js": "^1.5.4",
     "vite": "^3.1.0",
     "windicss": "^3.5.6"
