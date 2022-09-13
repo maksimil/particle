@@ -4,6 +4,7 @@ import SideBar from "@components/SideBar.astro";
 import { getArticles } from "@api/article";
 import LinkButton from "@components/LinkButton";
 import ArticleHead from "@components/ArticleHead.astro";
+import MdContents from "@components/MdContents.astro";
 
 export const getStaticPaths = async () => {
   const articles = await getArticles();
@@ -45,6 +46,9 @@ const current = chapter.title;
           url={`/article/${id}/${chapter.id}`}
           title={chapter.title}
         />
+        <div class="pl-2 pt-2">
+          <MdContents md={chapter.md} />
+        </div>
       </div>
     </div>
   </body>

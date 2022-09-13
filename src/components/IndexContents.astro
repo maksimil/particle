@@ -1,9 +1,0 @@
----
-import MdContents from "./MdContents.astro";
-const { article } = Astro.props;
----
-
-<div class="pl-2 pt-2">
-  <div class="text-xl text-c2">by <i>{article.author}</i></div>
-  <MdContents md={article.md} />
-</div>
