@@ -4,6 +4,7 @@ const { links, current } = Astro.props ;
 ---
 
 <div class="h-screen bg-c0 p-2 pr-10">
+  <SideLink link="/" text="Main page" /><br/>
   {
     links.map(([name, link]) => {
       const mark = name === current ? ">" : "-";
