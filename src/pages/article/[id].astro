@@ -4,6 +4,7 @@ import SideBar from "@components/SideBar.astro";
 import LinkButton from "@components/LinkButton";
 import { getArticles } from "@api/article";
 import ArticleHead from "@components/ArticleHead.astro";
+import IndexContents from "@components/IndexContents.astro";
 
 export const getStaticPaths = async () => {
   const articles = await getArticles();
@@ -35,6 +36,7 @@ const current = article.title;
       <SideBar {links} {current} />
       <div class="flex-1">
         <ArticleHead url={`/article/${id}`} title={article.title} />
+        <IndexContents {article} />
       </div>
     </div>
   </body>
