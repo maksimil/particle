@@ -1,0 +1,37 @@
+---
+import "virtual:windi.css";
+import { getArticles } from "@api/article";
+import SideLink from "@components/SideLink.astro";
+
+const links = (await getArticles()).map((article) => [
+  article.title,
+  `/article/${article.id}`,
+]);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>particle</title>
+  </head>
+  <body>
+    <div class="w-screen h-screen bg-c0 pl-5 pt-5 pb-5 flex flex-col">
+      <div class="text-4xl text-c3 font-semibold font-mono tracking-wide">
+        Borwse
+      </div>
+      <div class="overflow-x-scroll flex-1">
+        {
+          links.map(([name, link]) => {
+            return (
+              <div>
+                <SideLink {link} text={`- ${name}`} />
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </body>
+</html>

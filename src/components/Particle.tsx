@@ -29,7 +29,7 @@ const Particle: Component = () => {
 
   onMount(() => {
     const mouseCheck = (e: MouseEvent) => {
-      console.log("check");
+      // console.log("check");
       setEnter(false);
       const rect = hitDiv.getBoundingClientRect();
       setEnter(

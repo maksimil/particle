@@ -1,14 +1,19 @@
 ---
 import SideLink from "./SideLink.astro";
-const { links, current } = Astro.props ;
+const { links, current } = Astro.props;
 ---
 
 <div class="h-screen bg-c0 p-2 pr-10">
-  <SideLink link="/" text="Main page" /><br/>
+  <SideLink link="/" text="Main page" /><br />
   {
     links.map(([name, link]) => {
       const mark = name === current ? ">" : "-";
-      return <SideLink {link} text={`${mark} ${name}`} /><br/>;
+      return (
+        <>
+          <SideLink {link} text={`${mark} ${name}`} />
+          <br />
+        </>
+      );
     })
   }
 </div>
