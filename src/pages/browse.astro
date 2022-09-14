@@ -1,12 +1,18 @@
 ---
 import "virtual:windi.css";
 import { getArticles } from "@api/article";
-import SideLink from "@components/SideLink.astro";
+import SearchBrowse from "@components/SearchBrowse";
 
-const links = (await getArticles()).map((article) => [
-  article.title,
-  `/article/${article.id}`,
-]);
+const links = (await getArticles()).map((article) => ([ article.title,
+   `/article/${article.id}`]));
+
+/* const links = (() => { */
+/*   let v = Array(100) */
+/*     .fill(1) */
+/*     .map((e, i, arr) => [`article-${100 - i}`, `/article/${i}`]); */
+/*   v.sort(([a, _1], [b, _2]) => a.localeCompare(b)); */
+/*   return v; */
+/* })(); */
 ---
 
 <html lang="en">
@@ -19,19 +25,9 @@ const links = (await getArticles()).map((article) => [
   <body>
     <div class="w-screen h-screen bg-c0 pl-5 pt-5 pb-5 flex flex-col">
       <div class="text-4xl text-c3 font-semibold font-mono tracking-wide">
-        Borwse
+        Browse
       </div>
-      <div class="overflow-x-scroll flex-1">
-        {
-          links.map(([name, link]) => {
-            return (
-              <div>
-                <SideLink {link} text={`- ${name}`} />
-              </div>
-            );
-          })
-        }
-      </div>
+      <SearchBrowse {links} client:load />
     </div>
   </body>
 </html>
