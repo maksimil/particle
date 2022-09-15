@@ -1,7 +1,64 @@
 import { Component, createSignal } from "solid-js";
+import type { Article } from "@api/article";
 
-const SearchBrowse: Component<{ links: [string, string][] }> = (props) => {
+type SearchItem = {
+  searchValue: string;
+  link: string;
+  isTitle: boolean;
+  Component: Component<{ search: string }>;
+};
+
+const toSearchItems = (article: Article): SearchItem[] => {
+  const titleItem: SearchItem = {
+    searchValue: article.title.toLowerCase(),
+    link: `/article/${article.id}`,
+    isTitle: true,
+    Component: (props) => {
+      return (
+        <>
+          <span class="text-c2">
+            {article.title.substring(0, props.search.length)}
+          </span>
+          {article.title.substring(props.search.length, article.title.length)}
+        </>
+      );
+    },
+  };
+
+  const chapterItems: SearchItem[] = article.chapters.map(
+    (chapter): SearchItem => {
+      return {
+        searchValue: chapter.title.toLowerCase(),
+        link: `/article/${article.id}/${chapter.id}`,
+        isTitle: false,
+        Component: (props) => {
+          return (
+            <>
+              <span class="text-c2">
+                {`${article.title} -> ${chapter.title.substring(
+                  0,
+                  props.search.length
+                )}`}
+              </span>
+              {chapter.title.substring(
+                props.search.length,
+                chapter.title.length
+              )}
+            </>
+          );
+        },
+      };
+    }
+  );
+
+  return [titleItem, ...chapterItems];
+};
+
+const SearchBrowse: Component<{ articles: Article[] }> = (props) => {
   const [search, setSearch] = createSignal("");
+
+  const items = props.articles.map(toSearchItems).flat();
+
   return (
     <>
       <div>
@@ -19,16 +76,22 @@ const SearchBrowse: Component<{ links: [string, string][] }> = (props) => {
         />
       </div>
       <div class="overflow-x-scroll flex-1">
-        {props.links
-          .filter(([name, _]) => name.startsWith(search()))
-          .map(([name, link]) => {
+        {items
+          .filter((item) => {
+            if (search() === "") {
+              return item.isTitle;
+            } else {
+              return item.searchValue.startsWith(search().toLowerCase());
+            }
+          })
+          .map((item) => {
             return (
               <div>
-                <a href={link} class="text-xl font-mono text-c3 hover:text-c2">
-                  <span class="text-c2">
-                    {name.substring(0, search().length)}
-                  </span>
-                  {name.substring(search().length, name.length)}
+                <a
+                  href={item.link}
+                  class="text-xl font-mono text-c3 hover:text-c2"
+                >
+                  {item.Component({ search: search() })}
                 </a>
               </div>
             );
