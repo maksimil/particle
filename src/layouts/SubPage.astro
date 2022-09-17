@@ -1,0 +1,26 @@
+---
+import "virtual:windi.css";
+import SideLink from "@components/SideLink.astro";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>particle</title>
+  </head>
+  <body>
+    <div class="w-screen h-screen bg-c0 pl-5 pt-5 pb-5 flex flex-col">
+      <div class="w-min whitespace-nowrap pr-2 border-b-2 border-c2 mb-2">
+        <SideLink text="Main page" link="/" />
+      </div>
+      <div class="text-4xl text-c3 font-semibold font-mono tracking-wide">
+        {title}
+      </div>
+      <slot />
+    </div>
+  </body>
+</html>

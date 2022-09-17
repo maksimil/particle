@@ -1,36 +1,11 @@
 ---
-import "virtual:windi.css";
 import { getArticles } from "@api/article";
 import SearchBrowse from "@components/SearchBrowse";
-import SideLink from "@components/SideLink.astro";
+import SubPage from "@layouts/SubPage.astro";
 
 const articles = await getArticles();
-
-/* const links = (() => { */
-/*   let v = Array(100) */
-/*     .fill(1) */
-/*     .map((e, i, arr) => [`article-${100 - i}`, `/article/${i}`]); */
-/*   v.sort(([a, _1], [b, _2]) => a.localeCompare(b)); */
-/*   return v; */
-/* })(); */
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>particle</title>
-  </head>
-  <body>
-    <div class="w-screen h-screen bg-c0 pl-5 pt-5 pb-5 flex flex-col">
-      <div class="w-min whitespace-nowrap pr-2 border-b-2 border-c2 mb-2">
-        <SideLink text="Main page" link="/" />
-      </div>
-      <div class="text-4xl text-c3 font-semibold font-mono tracking-wide">
-        Browse
-      </div>
-      <SearchBrowse {articles} client:load />
-    </div>
-  </body>
-</html>
+<SubPage title="Browse">
+  <SearchBrowse {articles} client:load />
+</SubPage>
