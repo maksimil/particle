@@ -34,7 +34,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		var body interface{}
 		err = json.Unmarshal(rawbody, &body)
 		if err != nil {
-			log.Error().Msg(fmt.Sprintf("Error in json parsing %s", err))
+			log.Error().Msg(fmt.Sprintf("Error in json parsing: %s", err))
+			log.Error().Msg(fmt.Sprintf("Errorous json: %s", rawbody))
 			http.Error(w, "Json parsing error", http.StatusBadRequest)
 			return
 		}

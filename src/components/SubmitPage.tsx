@@ -1,4 +1,11 @@
-import { Component, createEffect, createSignal, For } from "solid-js";
+import {
+  Component,
+  createEffect,
+  createSignal,
+  For,
+  createMemo,
+  Show,
+} from "solid-js";
 import { createStore, unwrap } from "solid-js/store";
 
 const TextField: Component<{
@@ -74,6 +81,26 @@ const SubmitPage: Component<{}> = () => {
     chapters: [],
   });
 
+  const [submitStatus, setSubmitStatus] = createSignal<
+    | { ty: "not-sent" }
+    | { ty: "sending" }
+    | { ty: "success" }
+    | { ty: "err"; code: number }
+  >({ ty: "not-sent" }, { equals: false });
+  const statusBar = createMemo(() => {
+    switch (submitStatus().ty) {
+      case "not-sent":
+        return "";
+      case "sending":
+        return "Sending >>>";
+      case "success":
+        return "Successful <3";
+      case "err":
+        //@ts-ignore
+        return `Failed with code ${submitStatus().code} :(`;
+    }
+  });
+
   createEffect(() => console.log(store));
   return (
     <div class="mt-2 w-100">
@@ -133,11 +160,35 @@ const SubmitPage: Component<{}> = () => {
       <button
         class="text-xl text-c3 hover:text-c2 font-mono mt-4"
         onclick={() => {
-          console.log("Submitting", unwrap(store));
+          setSubmitStatus({ ty: "sending" });
+          const data = unwrap(store);
+          console.log("Submitting", data);
+          const body = JSON.stringify(data);
+          fetch("/api/submit", {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body,
+          }).then((v) => {
+            if (v.status === 200) {
+              setSubmitStatus({ ty: "success" });
+            } else {
+              setSubmitStatus({ ty: "err", code: v.status });
+            }
+          });
         }}
       >
         submit ^_^
       </button>
+      <Show when={statusBar() !== ""}>
+        <div class="text-xl text-c3 font-mono mt-4">{statusBar()}</div>
+      </Show>
     </div>
   );
 };
