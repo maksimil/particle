@@ -1,4 +1,4 @@
-package handler
+package api
 
 import (
 	"encoding/json"
@@ -21,82 +21,42 @@ func init() {
 	log.Logger = log.Output(output)
 }
 
-func spretty(data interface{}) string {
-	out, err := json.MarshalIndent(data, "", "  ")
-	if err != nil {
-		log.Warn().Msg("Pretty-printing failed")
-		log.Warn().Msg(fmt.Sprintf("Data: %s", data))
-		return ""
-	}
-	return (string)(out)
-}
-
-type Article struct {
-	Title       string    `json:"title"`
-	Author      string    `json:"author"`
-	Description string    `json:"description"`
-	Chapters    []Chapter `json:"chapters"`
-}
-
-type Chapter struct {
-	Title    string `json:"title"`
-	Id       string `json:"id"`
-	Contents string `json:"contents"`
-}
-
 func Handler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodPost:
-		defer r.Body.Close()
-		rawbody, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			log.Error().Msg(fmt.Sprintf("Error on post %s", err))
-			http.Error(w, "Server error", http.StatusInternalServerError)
-			return
-		}
-
-		var body Article
-		err = json.Unmarshal(rawbody, &body)
-		if err != nil {
-			log.Error().Msg(fmt.Sprintf("Error in json parsing: %s", err))
-			log.Error().Msg(fmt.Sprintf("Errorous json: %s", rawbody))
-			http.Error(w, "Json parsing error", http.StatusBadRequest)
-			return
-		}
-
-		log.Info().Msg(fmt.Sprintf("Post request with body:\n%s", spretty(body)))
-
-		files := makeFiles(body)
-		log.Info().Msg(fmt.Sprintf("ArticleFiles:\n%s\n%s", spretty(files), files.Index))
-
-		fmt.Fprint(w, "hi")
+		handler(w, r)
 	default:
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
-type ArticleFiles struct {
-	Index    string
-	Chapters []ChapterFile
-}
-
-type ChapterFile struct {
-	Id       string
-	Contents string
-}
-
-func c[K any](v K) K {
-	return v
-}
-
-func collect[K any, V any](arr []K, fn func(v K) V) []V {
-	out := make([]V, 0)
-
-	for i := 0; i < len(arr); i++ {
-		out = append(out, fn(arr[i]))
+func handler(w http.ResponseWriter, r *http.Request) {
+	// reading raw body
+	defer r.Body.Close()
+	rawbody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Error().Msg(fmt.Sprintf("Error on post %s", err))
+		http.Error(w, "Server error", http.StatusInternalServerError)
+		return
 	}
 
-	return out
+	// parsing json data
+	var body Article
+	err = json.Unmarshal(rawbody, &body)
+	if err != nil {
+		log.Error().Msg(fmt.Sprintf("Error in json parsing: %s", err))
+		log.Error().Msg(fmt.Sprintf("Errorous json: %s", rawbody))
+		http.Error(w, "Json parsing error", http.StatusBadRequest)
+		return
+	}
+
+	log.Info().Msg(fmt.Sprintf("Post request with body:\n%s", Spretty(body)))
+
+	// creating file data
+	files := makeFiles(body)
+	log.Info().Msg(fmt.Sprintf("ArticleFiles:\n%s", Spretty(files)))
+
+	fmt.Fprint(w, "hi")
 }
 
 func makeFiles(data Article) ArticleFiles {
@@ -105,7 +65,7 @@ func makeFiles(data Article) ArticleFiles {
 	files.Index = fmt.Sprintf(
 		"---\ntitle: %s\nauthor: %s\nchapters:\n%s\n---\n\n%s",
 		data.Title, data.Author,
-		strings.Join(collect(data.Chapters, func(k Chapter) string {
+		strings.Join(Collect(data.Chapters, func(k Chapter) string {
 			return fmt.Sprintf("  - %s", k.Id)
 		}), "\n"), data.Description)
 
