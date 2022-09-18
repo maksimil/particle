@@ -1,3 +1,4 @@
+import * as path from "node:path";
 import {
   Component,
   createEffect,
@@ -35,7 +36,7 @@ const TextField: Component<{
 
 const FileField: Component<{
   label: string;
-  load: (text: string) => void;
+  load: (text: string, name: string) => void;
 }> = (props) => {
   const [fileName, setFileName] = createSignal("Upload file");
   const upload = () => {
@@ -48,7 +49,7 @@ const FileField: Component<{
       }
       const file = fileSelector.files[0];
       file.text().then((value) => {
-        props.load(value);
+        props.load(value, file.name);
         setFileName(file.name);
       });
     };
@@ -70,7 +71,7 @@ type SubmitData = {
   title: string;
   author: string;
   description: string | null;
-  chapters: { title: string; contents: string | null }[];
+  chapters: { title: string; contents: string | null; id: string }[];
 };
 
 const SubmitPage: Component<{}> = () => {
@@ -130,7 +131,10 @@ const SubmitPage: Component<{}> = () => {
               />
               <FileField
                 label="contents"
-                load={(text) => setStore("chapters", idx(), "contents", text)}
+                load={(text, name) => {
+                  setStore("chapters", idx(), "contents", text);
+                  setStore("chapters", idx(), "id", name.split(".")[0]);
+                }}
               />
               <button
                 class="text-xl text-c3 hover:text-c2 font-mono mt-2"
@@ -151,7 +155,10 @@ const SubmitPage: Component<{}> = () => {
       <button
         class="text-xl text-c3 hover:text-c2 font-mono mt-4"
         onclick={() => {
-          setStore("chapters", (c) => [...c, { title: "", contents: null }]);
+          setStore("chapters", (c) => [
+            ...c,
+            { title: "", contents: null, id: "none" },
+          ]);
         }}
       >
         add chapter
