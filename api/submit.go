@@ -4,6 +4,7 @@ import (
 	"archive/tar"
 	"bytes"
 	"context"
+	"encoding/base32"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -17,6 +18,7 @@ import (
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"lukechampine.com/blake3"
 )
 
 type Article struct {
@@ -175,11 +177,14 @@ func SendArticle(article Article, files ArticleFiles) {
 		log.Fatal().Msgf("Error on closing tar archive:\n%s", err)
 	}
 
+	hash := blake3.Sum256(buf.Bytes())
+	fname := strings.ToLower(base32.StdEncoding.EncodeToString(hash[:])[:8])
+
 	message := discord.NewWebhookMessageCreateBuilder().
 		SetContentf(
 			"%s\nNew article submission\n\n*title*: %s\n*author*: %s",
 			os.Getenv("MENTIONS"), article.Title, article.Author).
-		AddFiles(discord.NewFile("article.tar", "", bytes.NewReader(buf.Bytes())))
+		AddFiles(discord.NewFile(fname+".tar", "", bytes.NewReader(buf.Bytes())))
 
 	client.CreateMessage(message.Build())
 
