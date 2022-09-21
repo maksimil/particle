@@ -1,6 +1,6 @@
 module github.com/maksimil/particle
 
-go 1.19
+go 1.18
 
 require (
 	github.com/disgoorg/disgo v0.13.20
