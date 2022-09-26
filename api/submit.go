@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/webhook"
@@ -65,11 +64,16 @@ func Collect[K any, V any](arr []K, fn func(v K) V) []V {
 }
 
 func init() {
-	output := zerolog.ConsoleWriter{}
-	output.Out = os.Stderr
-	output.TimeFormat = time.RFC3339
+	// if os.Getenv("VERCEL_ENV") == "preview" ||
+	//   os.Getenv("VERCEL_ENV") == "production" {
+	//
+	// }
 
-	log.Logger = log.Output(output)
+	if os.Getenv("VERCEL_ENV") == "development" {
+		output := zerolog.ConsoleWriter{}
+		output.Out = os.Stderr
+		log.Logger = log.Output(output)
+	}
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -86,7 +90,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	rawbody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Error().Msg(fmt.Sprintf("Error on post %s", err))
+		log.Error().Err(err).Msg("Error on post")
 		http.Error(w, "Server error", http.StatusInternalServerError)
 		return
 	}
@@ -95,17 +99,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var body Article
 	err = json.Unmarshal(rawbody, &body)
 	if err != nil {
-		log.Error().Msg(fmt.Sprintf("Error in json parsing: %s", err))
-		log.Error().Msg(fmt.Sprintf("Errorous json: %s", rawbody))
+		log.Error().Err(err).Bytes("errjson", rawbody).
+			Msg("Error in json parsing")
 		http.Error(w, "Json parsing error", http.StatusBadRequest)
 		return
 	}
 
-	log.Info().Msg(fmt.Sprintf("Post request with body:\n%s", Spretty(body)))
+	log.Info().Interface("body", body).Msg("Post request")
 
 	// creating file data
 	files := makeFiles(body)
-	log.Info().Msg(fmt.Sprintf("ArticleFiles:\n%s", Spretty(files)))
+	log.Info().Interface("files", files).Msg("ArticleFiles")
 
 	// sending discord webhook
 	SendArticle(body, files)
@@ -166,15 +170,15 @@ func SendArticle(article Article, files ArticleFiles) {
 			Size: int64(len(file.Body)),
 		}
 		if err := tw.WriteHeader(hdr); err != nil {
-			log.Fatal().Msgf("Error on tar file %s:\n%s", file.Name, err)
+			log.Fatal().Str("fname", file.Name).Err(err).Msg("Error on tar file")
 		}
 		if _, err := tw.Write([]byte(file.Body)); err != nil {
-			log.Fatal().Msgf("Error on tar file %s:\n%s", file.Name, err)
+			log.Fatal().Str("fname", file.Name).Err(err).Msg("Error on tar file")
 		}
 	}
 
 	if err := tw.Close(); err != nil {
-		log.Fatal().Msgf("Error on closing tar archive:\n%s", err)
+		log.Fatal().Err(err).Msg("Error on closing tar archives")
 	}
 
 	hash := blake3.Sum256(buf.Bytes())
@@ -188,5 +192,5 @@ func SendArticle(article Article, files ArticleFiles) {
 
 	client.CreateMessage(message.Build())
 
-	log.Info().Msg("Sent the notification")
+	log.Info().Str("hash", fname).Msg("Sent the notification")
 }
